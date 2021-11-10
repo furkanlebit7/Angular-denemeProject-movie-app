@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header">
+    {{ getTitle() }}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li
+      class="list-group-item d-flex align-items-center justify-content-between"
+      *ngFor="let movie of movies"
+      routerLink="/detail/{{ movie.id }}"
+    >
+      <span>
+        <span
+          class="badge bg-primary rounded-pill mx-3"
+          [class.bg-white]="movie === selectedMovie"
+          [class.text-primary]="movie === selectedMovie"
+        >
+          {{ movie.id }}</span
+        >{{ movie.name }}
+      </span>
+      <button
+        (click)="delete(movie)"
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </li>
+  </ul>
+</div>
+
+<div class="card my-3">
+  <div class="card-header">Add Movie</div>
+  <div class="card-body">
+    <div class="form-group mt-2">
+      <label for="name">Movie Name</label>
+      <input #name type="text" class="form-control" />
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="imageUrl">Movie Image Url</label>
+      <input #imageUrl type="text" class="form-control" />
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="description">Movie Description</label>
+      <textarea #description type="text" class="form-control"></textarea>
+    </div>
+
+    <button
+      class="btn btn-success btn-sm mt-3"
+      (click)="
+        add(name.value, imageUrl.value, description.value);
+        name.value = '';
+        imageUrl.value = '';
+        description.value = ''
+      "
+    >
+      Add Movie
+    </button>
+  </div>
+</div>
